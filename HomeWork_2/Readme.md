@@ -1,20 +1,20 @@
 1 вариант:
-- создайте виртуальную машину c Ubuntu 18.04 LTS (bionic) в GCE типа n1-standard-1 в default VPC в любом регионе и зоне, например us-central1-a
+• создайте виртуальную машину c Ubuntu 18.04 LTS (bionic) в GCE типа n1-standard-1 в default VPC в любом регионе и зоне, например us-central1-a
 
     Создал ВМ instance-2
 
-- поставьте на нее PostgreSQL через sudo apt
+• поставьте на нее PostgreSQL через sudo apt
 
     Установил 
     sudo apt install -y postgresql
 
-- проверьте что кластер запущен через sudo -u postgres pg_lsclusters
+• проверьте что кластер запущен через sudo -u postgres pg_lsclusters
 
     sudo -u postgres pg_lsclusters
     Ver Cluster Port Status Owner    Data directory              Log file
     10  main    5432 online postgres /var/lib/postgresql/10/main /var/log/postgresql/postgresql-10-main.log
 
-- зайдите из под пользователя postgres в psql и сделайте произвольную таблицу с произвольным содержимым
+• зайдите из под пользователя postgres в psql и сделайте произвольную таблицу с произвольным содержимым
 
     postgres=# create table test(c1 text);
     postgres=# insert into test values('1');
@@ -30,38 +30,38 @@
     INSERT 0 1
     postgres=#\q
 
-- остановите postgres например через sudo -u postgres pg_ctlcluster 10 main stop
+• остановите postgres например через sudo -u postgres pg_ctlcluster 10 main stop
 
     sudo -u postgres pg_ctlcluster 10 main stop
     Warning: stopping the cluster using pg_ctlcluster will mark the systemd unit as failed. Consider using systemctl:
 
-- создайте новый standard persistent диск GKE через Compute Engine -> Disks в том же регионе и зоне что GCE инстанс размером например 10GB
+• создайте новый standard persistent диск GKE через Compute Engine -> Disks в том же регионе и зоне что GCE инстанс размером например 10GB
 
     disk-1
 
-- добавьте свеже-созданный диск к виртуальной машине - надо зайти в режим ее редактирования и дальше выбрать пункт attach existing disk
+• добавьте свеже-созданный диск к виртуальной машине - надо зайти в режим ее редактирования и дальше выбрать пункт attach existing disk
 
     Добавил
 
-- проинициализируйте диск согласно инструкции и подмонтировать файловую систему, только не забывайте менять имя диска на актуальное, в вашем случае это скорее всего будет /dev/sdb - https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux
+• проинициализируйте диск согласно инструкции и подмонтировать файловую систему, только не забывайте менять имя диска на актуальное, в вашем случае это скорее всего будет /dev/sdb - https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux
 
     Смонтировал согласно иннструкции
 
-- сделайте пользователя postgres владельцем /mnt/data - chown -R postgres:postgres /mnt/data/
+• сделайте пользователя postgres владельцем /mnt/data - chown -R postgres:postgres /mnt/data/
 
     sudo chown -R postgres:postgres /mnt/data/
 
-- перенесите содержимое /var/lib/postgres/10 в /mnt/data - mv /var/lib/postgresql/10 /mnt/data
+• перенесите содержимое /var/lib/postgres/10 в /mnt/data - mv /var/lib/postgresql/10 /mnt/data
 
     sudo su - postgres
     mv /var/lib/postgresql/10 /mnt/data
 
-- попытайтесь запустить кластер - sudo -u postgres pg_ctlcluster 10 main start
+• попытайтесь запустить кластер - sudo -u postgres pg_ctlcluster 10 main start
 
     Выходит ошибка
     Error: /var/lib/postgresql/10/main is not accessible or does not exist
 
-- напишите получилось или нет и почему
+• напишите получилось или нет и почему
 
     потомучто директория, которая описана в конфиге отсутсвует, поэтому postgresql не стартует
     решения 2 
@@ -69,21 +69,21 @@
     2) сделать ссылку на директорию 
         Пример: ln -s /mnt/data/10 /var/lib/postgresql/10
 
-- задание: найти конфигурационный параметр в файлах раположенных в /etc/postgresql/10/main который надо поменять и поменяйте его
+• задание: найти конфигурационный параметр в файлах раположенных в /etc/postgresql/10/main который надо поменять и поменяйте его
 
     sudo vi /etc/postgresql/10/main/postgresql.conf
 
-- напишите что и почему поменяли
+• напишите что и почему поменяли
 
     Потому что по этому пути находятся наши данные поле того как мы их переместили
     Меняем data_directory = '/mnt/data/10/main'
 
-- попытайтесь запустить кластер - sudo -u postgres pg_ctlcluster 10 main start
-- напишите получилось или нет и почему
+• попытайтесь запустить кластер - sudo -u postgres pg_ctlcluster 10 main start
+• напишите получилось или нет и почему
 
     Получилось, потому что у на все правильно))
 
-- зайдите через через psql и проверьте содержимое ранее созданной таблицы
+• зайдите через через psql и проверьте содержимое ранее созданной таблицы
 
     postgres=# select * from test;
     c1
@@ -91,7 +91,7 @@
     1
     (1 row)
 
-- задание со звездочкой: не удаляя существующий GCE инстанс сделайте новый, поставьте на его PostgreSQL, удалите файлы с данными из /var/lib/postgres, перемонтируйте внешний диск который сделали ранее от первой виртуальной машины ко второй и запустите PostgreSQL на второй машине так чтобы он работал с данными на внешнем диске, расскажите как вы это сделали и что в итоге получилось.
+• задание со звездочкой: не удаляя существующий GCE инстанс сделайте новый, поставьте на его PostgreSQL, удалите файлы с данными из /var/lib/postgres, перемонтируйте внешний диск который сделали ранее от первой виртуальной машины ко второй и запустите PostgreSQL на второй машине так чтобы он работал с данными на внешнем диске, расскажите как вы это сделали и что в итоге получилось.
 
     1. Закоментировал /etc/fstab
     2. Выключил пострегрес на 1 ВМ
