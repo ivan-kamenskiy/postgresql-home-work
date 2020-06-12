@@ -199,4 +199,15 @@
 
     все прошло на ура)
 
-
+Задание по установки postgresql через helm
+     
+     • 
+        1) Разворачиваем GCP kubernetes
+        2) Устанавливаем kubectl (при нажатии подключиться к кластеру гугл сам скажет каманды по установки и сам закинет ключи)
+        3) Устанавливаем helm (установали через chocolate) choco install kubernetes-helm
+        4) Helm chart выбрал https://github.com/helm/charts/tree/master/stable/postgresql
+            1. Добавляем репозиторий: helm repo add bitnami https://charts.bitnami.com/bitnami
+            2. Устанавливаем chart: 
+            helm install --debug --dry-run  postgresql --set postgresqlDatabase=prisma --set global.postgresql.postgresqlPassword=kittensinglobals --set postgresqlPassword=kittensinmittens bitnami/postgresql
+            3. Заходим в базу через другой контейнер
+            kubectl run postgresql-client --rm --tty -i --restart='Never' --namespace default --image docker.io/bitnami/postgresql:11.8.0-debian-10-r19 --env="PGPASSWORD=kittensinglobals" --command -- psql --host postgresql -U postgres -d prisma -p 5432
