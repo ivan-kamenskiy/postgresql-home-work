@@ -203,7 +203,7 @@
      
         1) Разворачиваем GCP kubernetes
         2) Устанавливаем kubectl (при нажатии подключиться к кластеру гугл сам скажет каманды по установки и сам закинет ключи)
-        3) Устанавливаем helm (установали через chocolate) choco install kubernetes-helm
+        3) Устанавливаем helm (установали через chocolate) choco install kubernetes-helm (для windows)
         4) Helm chart выбрал https://github.com/helm/charts/tree/master/stable/postgresql
             1. Добавляем репозиторий: helm repo add bitnami https://charts.bitnami.com/bitnami
             2. Устанавливаем chart: 
