@@ -37,34 +37,12 @@
 
 • нагрузить кластер через утилиту
 
-    Подготавливаем базу:
-
-        ./tpcc.lua --db-driver=pgsql \
-        --pgsql-host=localhost \
-        --pgsql-port=5432 \
-        --pgsql-user=test \
-        --pgsql-password=test \
-        --pgsql-db=test \
-        --time=300 --threads=64 --report-interval=1 --tables=10 --scale=100 \
-        prepare
-    
-    Запускаем бечмаркт:
-
-        ./tpcc.lua --db-driver=pgsql \
-        --pgsql-host=localhost \
-        --pgsql-port=5432 \
-        --pgsql-user=test \
-        --pgsql-password=test \
-        --pgsql-db=test \
-        --time=300 \
-        --threads=64 \
-        --report-interval=1 \
-        --tables=10 \
-        --scale=100 \
-        run
+    Выполнил бенчмарк черезе pgbench 
+    postgres@instance-1:~$ pgbench -c 10 -j 2 -t 10000 test
 
 
-https://github.com/Percona-Lab/sysbench-tpcc (требует установки
-https://github.com/akopytov/sysbench)
 • написать какого значения tps удалось достичь, показать какие параметры в
 какие значения устанавливали и почему
+
+    tps = 1668.231179 (including connections establishing)
+    tps = 1668.457460 (excluding connections establishing)
