@@ -43,6 +43,11 @@
 
 • написать какого значения tps удалось достичь, показать какие параметры в
 какие значения устанавливали и почему
-
+    
+    С настройками:
     tps = 1668.231179 (including connections establishing)
     tps = 1668.457460 (excluding connections establishing)
+
+    С настройками по умолчанию:
+    tps = 941.105759 (including connections establishing)
+    tps = 941.159402 (excluding connections establishing)
