@@ -60,8 +60,8 @@
 
     CREATE INDEX idx_test_company ON test USING GIN (to_tsvector('english', company));
     
-    explain
-    test-# select company from test where to_tsvector('english', company) @@ to_tsquery('english', 'elite
+    test-# explain
+    test'# select company from test where to_tsvector('english', company) @@ to_tsquery('english', 'elite
     test'# ');
                                            QUERY PLAN
     -----------------------------------------------------------------------------------------
