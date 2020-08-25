@@ -63,8 +63,6 @@
     test-# explain
     test'# select company from test where to_tsvector('english', company) @@ to_tsquery('english', 'elite
     test'# ');
-                                           QUERY PLAN
-    -----------------------------------------------------------------------------------------
      Bitmap Heap Scan on test  (cost=321.73..108706.03 rows=33771 width=24)
        Recheck Cond: (to_tsvector('english'::regconfig, company) @@ '''elit'''::tsquery)
        ->  Bitmap Index Scan on idx_test_company  (cost=0.00..313.28 rows=33771 width=0)
