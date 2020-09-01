@@ -101,10 +101,11 @@
 4. Запускаем patroni deb_patroni_1.yml > patroni_member_1.log 2>&1 & и patroni deb_patroni_2.yml > patroni_member_2.log 2>&1 &
 5. Проверям:
 
-    postgres@instance-2:~$ patronictl -d etcd://etcd:2379 list patroni_cluster_1_2
-    + Cluster: patroni_cluster_1_2 (6867445601898573826) --------+
-    |  Member  |     Host    |  Role  |  State  | TL | Lag in MB |
-    +----------+-------------+--------+---------+----+-----------+
-    | member_1 | 10.128.0.38 |        | running |  1 |         0 |
-    | member_3 | 10.128.0.37 | Leader | running |  1 |           |
-    +----------+-------------+--------+---------+----+-----------+
+        postgres@instance-2:~$ patronictl -d etcd://etcd:2379 list patroni_cluster_1_2
+        + Cluster: patroni_cluster_1_2 (6867445601898573826) --------+
+        |  Member  |     Host    |  Role  |  State  | TL | Lag in MB |
+        +----------+-------------+--------+---------+----+-----------+
+        | member_1 | 10.128.0.38 |        | running |  1 |         0 |
+        | member_3 | 10.128.0.37 | Leader | running |  1 |           |
+        +----------+-------------+--------+---------+----+-----------+
+    
