@@ -16,7 +16,7 @@
 
 4. Проверил скорость запросов CockroachDB разнорегиональной с postgresql
     1. select
-    
+
     Postgresql:
 
         test=# select  trip_start_timestamp from test where trip_start_timestamp= '2014-06-30 20:45:00';
@@ -178,6 +178,7 @@
         Time: 305.720233ms
 
     3. update
+
     Postgresql:
 
         update test set trip_total = 7 WHERE trip_total = 6;
@@ -192,12 +193,13 @@
 
     CockroachDB:
 
-
-
 5. Проблемы
+
     1. Проблемы с загрузкой csv, так особо и не понял как грузить, те скриты которые использовал для Postgresql не работали для CockroachDB, пришлось делать дамп
     2. Долго искал нормальную инструкцию по установке и добавлению в кластер, оказалось все просто(правда не использовал сертификат)
+
 6. Результаты (я не добавлял нигде индексы)
+
     1. CockroachDB бодрее работает с select
     2. Со вставками строк CockroachDB показывает уже намного хуже результат
     3. С update у CockroachDB совсем все плохо оставил на 2 часа так и не выполнился
