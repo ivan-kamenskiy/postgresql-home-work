@@ -16,6 +16,7 @@
 
 4. Проверил скорость запросов CockroachDB разнорегиональной с postgresql
     1. select
+    
     Postgresql:
 
         test=# select  trip_start_timestamp from test where trip_start_timestamp= '2014-06-30 20:45:00';
@@ -36,6 +37,7 @@
         Time: 29.878412071s
 
     2. insert 
+
     Postgresql:
 
         test=# INSERT INTO test(
